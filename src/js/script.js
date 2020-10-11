@@ -94,6 +94,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -193,50 +194,64 @@
           else if (!optionSelected && option.default) {
             (price = price - option.price);
           }
-        }
-        /* END ELSE IF: if option is not selected and option is default */
-      }
-      /* END LOOP: for each optionId in param.options */
-    }
-    /* END LOOP: for each paramId in thisProduct.data.params */
 
-    /* set the contents of thisProduct.priceElem to be the value of variable price */
-    let variablePrice = thisProduct.priceElem;
+
+          let className = '.' + paramId + '-' + optionId;
+          let image = thisProduct.imageWrapper.querySelectorAll(className);
+
+          if (optionSelected) {
+            for (let image of images) {
+              classNames.menuProduct.imageVisible.add('active');
+            }
+          } else {
+            for (let image of images) {
+              classNames.menuProduct.imageVisible.remove('active');
+            }
+
+          }
+          /* END ELSE IF: if option is not selected and option is default */
+        }
+        /* END LOOP: for each optionId in param.options */
+      }
+      /* END LOOP: for each paramId in thisProduct.data.params */
+
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
+      let variablePrice = thisProduct.priceElem;
+    }
+
   }
 
-}
+  const app = {
+    initMenu: function () {
+      const thisApp = this;
+      console.log('thisApp.data:', thisApp.data);
 
-const app = {
-  initMenu: function () {
-    const thisApp = this;
-    console.log('thisApp.data:', thisApp.data);
+      for (let productData in thisApp.data.products) {
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
 
-    for (let productData in thisApp.data.products) {
-      new Product(productData, thisApp.data.products[productData]);
-    }
-  },
+    initData: function () {
+      const thisApp = this;
 
-  initData: function () {
-    const thisApp = this;
+      thisApp.data = dataSource;
+    },
 
-    thisApp.data = dataSource;
-  },
+    init: function () {
+      const thisApp = this;
+      console.log('*** App starting ***');
+      console.log('thisApp:', thisApp);
+      console.log('classNames:', classNames);
+      console.log('settings:', settings);
+      console.log('templates:', templates);
+      console.log('thisApp.data:', thisApp.data);
 
-  init: function () {
-    const thisApp = this;
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
-    console.log('classNames:', classNames);
-    console.log('settings:', settings);
-    console.log('templates:', templates);
-    console.log('thisApp.data:', thisApp.data);
+      thisApp.initData();
+      thisApp.initMenu();
 
-    thisApp.initData();
-    thisApp.initMenu();
+    },
 
-  },
+  };
 
-};
-
-app.init();
+  app.init();
 }
