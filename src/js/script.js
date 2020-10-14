@@ -246,6 +246,7 @@
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+      thisWidget.value = thisWidget.element.querySelector(settings.amountWidget.defaultValue);
 
       thisWidget.getElements(element);
 
@@ -257,6 +258,11 @@
     
         thisWidget.value = newValue;
         thisWidget.input.value = thisWidget.value;
+
+        if (thisWidget.isValid(newValue) != settings.amountWidget.defaultMin >= settings.amountWidget.defaultMax) {
+          thisWidget.correctValue = newValue;
+        }
+
       }
     
       announce() {
