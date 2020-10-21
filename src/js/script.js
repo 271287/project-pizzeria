@@ -375,7 +375,6 @@
 
   }
 
-
   class Cart {
     constructor(element) {
       const thisCart = this;
