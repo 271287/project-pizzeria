@@ -26,9 +26,8 @@ export const select = {
             input: 'input.amount',
             linkDecrease: 'a[href="#less"]',
             linkIncrease: 'a[href="#more"]',
-        },
+        };
     },
-
     cart: {
         productList: '.cart__order-summary',
         toggleTrigger: '.cart__summary',

@@ -68,9 +68,7 @@ class AmountWidget {
             console.log('test');
             thisWidget.setValue(thisWidget.value + 1);
         });
-
     }
-
-}
+},
 
 export default AmountWidget;

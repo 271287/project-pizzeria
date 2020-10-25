@@ -1,4 +1,4 @@
-import {settings,select,classNames,templates} from './settings.js';
+import { settings, select, classNames, templates } from './settings.js';
 import CartProduct from './components/CartProduct.js';
 import utils from './utils.js';
 
@@ -111,5 +111,6 @@ class Cart {
         cartProduct.dom.wrapper.remove();
         thisCart.update();
     }
-}
+},
+
 export default Cart;

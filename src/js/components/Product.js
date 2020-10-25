@@ -199,8 +199,6 @@ class Product {
         thisProduct.name = thisProduct.data.name;
         thisProduct.amount = thisProduct.amountWidget.value;
 
-        console.log(app);
-
         //app.cart.add(thisProduct);//
 
         const event = new CustomEvent('add-to-cart', {
@@ -226,7 +224,6 @@ class Product {
             thisProduct.processOrder();
         });
     }
-
-}
+},
 
 export default Product;
