@@ -1,8 +1,70 @@
-import {settings,select,templates,classNames} from './settings.js';
+import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 
 const app = {
+  initBooking: function(){
+    const thisApp = this;
+    
+    const bookingWidgetElem = document.querySelector(select.containerOf.booking);
+    thisApp.bookingWidget = new Booking(bookingWidgetElem);
+
+  },
+
+  initPages: function () {
+    const thisApp = this;
+
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+    thisApp.navLinks = document.querySelectorAll(select.navLinks);
+
+    const idFromHash = window.location.hash.replace('#', '');
+    //console.log('idFromHash', idFromHash);
+
+    let pageMatchingHash = thisApp.pages[0].id;
+
+    for(let page of thisApp.pages){
+      if(page.id == idFromHash){
+        pageMatchingHash = page.id;
+        break;
+      }
+    }
+
+    thisApp.activatePage(thisApp.pages[0].id);
+
+    for(let link of thisApp.navLinks){
+      link.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+
+        /*get page id from href attribute */
+        const id = clickedElement.getAttribute('href').replace('#', '');
+
+        /*run thisApp.activatePage with that id */
+        thisApp.activatePage(id);
+
+        /*change URL hush*/
+        window.location.hash = '#/' + id;
+      });
+    }
+  },
+
+  activatePage: function (pageId) {
+    const thisApp = this;
+
+    for(let page of thisApp.pages){
+      page.classList.toggle(classNames.page.active, page.id == pageId);
+    }
+    
+    for(let link of thisApp.navLinks){
+      link.classList.toggle(
+        classNames.nav.active, 
+        link.getAttribute('href') == '#' + pageId 
+      );
+    }
+
+  },
+
   initMenu: function () {
     const thisApp = this;
     console.log('thisApp.data:', thisApp.data);
@@ -48,16 +110,17 @@ const app = {
   init: function () {
     const thisApp = this;
 
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
-    console.log('classNames:', classNames);
-    console.log('settings:', settings);
-    console.log('templates:', templates);
-    console.log('thisApp.data:', thisApp.data);
+    //console.log('*** App starting ***');
+    //console.log('thisApp:', thisApp);
+    //console.log('classNames:', classNames);
+    //console.log('settings:', settings);
+    //console.log('templates:', templates);
+    //console.log('thisApp.data:', thisApp.data);
 
+    thisApp.initPages();
     thisApp.initData();
-
     thisApp.initCart();
+    thisApp.initBooking();
 
   },
 
