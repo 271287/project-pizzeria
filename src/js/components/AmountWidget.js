@@ -1,52 +1,36 @@
 import { select, settings } from '../settings.js';
+import BaseWidget from './BaseWidget.js';
 
-class AmountWidget {
+class AmountWidget extends BaseWidget {
   constructor(element) {
+    super(element,settings.amountWidget.defaultValue);
+
     const thisWidget = this;
 
     thisWidget.getElements(element);
+
     thisWidget.initActions();
 
-    thisWidget.value = settings.amountWidget.defaultValue;
-    thisWidget.dom.input.value = settings.amountWidget.defaultValue;
   }
 
-  getElements(element) {
+  getElements() {
     const thisWidget = this;
-
-    thisWidget.dom = {};
-    thisWidget.dom.wrapper = element;
 
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
 
-  setValue(value) {
-    const thisWidget = this;
-
-    const newValue = parseInt(value);
-
-    console.log(newValue);
-    /*TO DO add validation */
-
-    thisWidget.value = newValue;
-    thisWidget.dom.input.value = thisWidget.value;
-
-    if (newValue != thisWidget.value && value >= settings.amountWidget.defaultMin && value <= settings.amountWidget.defaultMax) {
-      thisWidget.correctValue = newValue;
-    }
-
-    thisWidget.announce();
-
+  isValid(value){
+    return !isNaN (value) 
+    &&value >= settings.amountWidget.defaultMin 
+    && value <= settings.amountWidget.defaultMax;
   }
 
-  announce() {
+  renderValue(){
     const thisWidget = this;
-    const event = new CustomEvent('updated', {
-      bubbles: true
-    });
-    thisWidget.dom.wrapper.dispatchEvent(event);
+
+    thisWidget.dom.input.value = thisWidget.value;
   }
 
   initActions() {
