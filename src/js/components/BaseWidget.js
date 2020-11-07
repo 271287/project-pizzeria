@@ -11,16 +11,13 @@ class BaseWidget {
   get value() {
     const thisWidget = this;
 
-    return thisWidget.correctValue();
+    return thisWidget.correctValue;
   }
 
   set value(value) {
     const thisWidget = this;
 
     const newValue = thisWidget.parseValue(value);
-
-    thisWidget.correctValue = newValue;
-    thisWidget.dom.input.value = thisWidget.correctValue;
 
     if (newValue != thisWidget.correctValue && thisWidget.isValid(newValue)) {
       thisWidget.correctValue = newValue;
@@ -52,6 +49,7 @@ class BaseWidget {
 
   announce() {
     const thisWidget = this;
+    console.log('annouce');
     const event = new CustomEvent('updated', {
       bubbles: true
     });

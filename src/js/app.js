@@ -1,7 +1,7 @@
-import {settings, select, classNames} from '../settings.js';
-import Product from './Product.js';
-import Cart from './Cart.js';
-import Booking from './Booking.js';
+import {settings, select, classNames} from './settings.js';
+import Product from './components/Product.js';
+import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 
 const app = {
   initBooking: function(){
@@ -45,7 +45,7 @@ const app = {
     const thisApp = this;
 
     for(let page of thisApp.pages){
-      page.classList.toggle(classNames.page.active, page.id == pageId);
+      page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
     
     for(let link of thisApp.navLinks){
@@ -54,6 +54,10 @@ const app = {
         link.getAttribute('href') == '#' + pageId 
       );
     }
+
+    document.body.classList = pageId;
+
+
 
   },
 

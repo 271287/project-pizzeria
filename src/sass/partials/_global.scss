@@ -17,3 +17,9 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+body.home {
+  .main-nav, #cart{
+    display: none;
+  }
+}

@@ -1,0 +1,58 @@
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.home-wrapper {
+  margin-top: 40px;
+  padding: 70px 50px;
+  background-color: $color-light;
+
+}
+
+.row {
+  overflow: auto;
+}
+
+.card {
+  padding: 5px;
+  border-radius: 5px;
+  font-family: 'Oswald', sans-serif;
+
+  .title {
+    padding: 40px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $color-light;
+  }
+}
+
+.image-order {
+  position: relative;
+  background: url('/images/assets/pizza-1.jpg') center;
+  background-size: cover;
+  margin-right: 5px;
+
+  .description {
+    transition: all 0.3s;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.5s;
+  }
+}
+
+.image-order:hover {
+  a {
+    margin-top: -10px;
+  }
+
+  .description {
+    opacity: 1;
+  }
+}

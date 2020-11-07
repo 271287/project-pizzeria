@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext"
     rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -24,12 +24,13 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
         <div id="cart" class="cart">
           <div class="cart__summary">
-            <span class="cart__total-number">0</span>
+            <span class="cart__total-number">5</span>
             <span class="cart__total-price">Total price: $<strong>0</strong></span>
             <i class="fas fa-chevron-down"></i>
             <i class="fas fa-shopping-cart cart__icon"></i>
@@ -63,7 +64,115 @@
       </div>
     </div>
   </header>
+
   <div id="pages">
+    <section class="home" id="home">
+      <div class="home-wrapper container">
+        <div class="row">
+          <div class="col col-6">
+            <div class="card image-order">
+              <h2 class="title"><a href="#order">order online</a></h2>
+              <h3 class="description">Delicious food delivered to your door</h3>
+            </div>
+          </div>
+          <div class="col col-6">
+            <div class="card image-book ">
+              <h2 class="title"><a href="#booking">book a table</a></h2>
+              <h3 class="description">Make a reservation for your table</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-12">
+            <div class="opening">
+              <h2 class="title">opening hours:</h2>
+              <h3 class="description">tue-sun, 12pm - 11pm</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-4">
+            <div class="image-carousel">
+              <h3>Girls eating</h3>
+            </div>
+          </div>
+          <div class="col col-8">
+            <div class="carousel"></div>
+          </div>
+        </div>
+
+        <div class="view-slide">
+          <p class="slide-icon">
+            <i class="far fa-circle"></i>
+          </p>
+          <p class="slide-icon">
+            <i class="far fa-circle"></i>
+          </p>
+          <p class="slide-icon">
+            <i class="far fa-circle"></i>
+          </p>
+        </div>
+
+        <div class="gallery">
+          <div class="row">
+            <div class="col col-4">
+              <div class="gallery-picture-one">
+                <div class="icons">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col col-4">
+              <div class="gallery-picture-two">
+                <div class="icons">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col col-4">
+              <div class="gallery-picture-three">
+                <div class="icons">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-4">
+              <div class="gallery-picture-four">
+                <div class="icons">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col col-4">
+              <div class="gallery-picture-five">
+                <div class="icons">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col col-4">
+              <div class="gallery-picture-six">
+                <div class="icons">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="footer"><a href="#">View more on Instagram</a></p>
+      </div>
+    </section>
+
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -71,6 +180,14 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+
+  <script id="template-slide" type="text/x-handlebars-template">
+    <div class="slide">
+      <h3 class="title">{{title}}</h3>
+       <p>{{quote}}</p>
+       <p><span class="author">- {{author}}</span></p>
+    </div>
+  </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
@@ -81,10 +198,10 @@
             <label class="booking-option-title">Pick a date</label>
             <input type="text" name="date">
           </div>
-          <div class="hour-picker range-slider">
+          <div class="hour-picker">
               <div class="output"></div>
               <label class="booking-option-title">Pick a time</label>
-            <input type="range" name="hour" value="12" min="12" max="24" step="0.5">
+            <input type="range" name="hour" value="12" min="12" max="24" step="0.5" class="slider" id="slider">
           </div>
         </div>
         <div class="floor-plan">
@@ -137,6 +254,7 @@
       </form>
     </div>
   </script>
+
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
       <div class="widget-amount"> <!-- widget-amount -->
@@ -223,7 +341,7 @@
               <div class="widget-amount"> <!-- widget-amount -->
                 <h3 class="product__params-title">Select quantity</h3>
                 <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
-                <input class="amount" type="text">
+                <input class="amount" type="text" value="1">
                 <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
               </div>
               <p class="product__total-price">
@@ -243,10 +361,12 @@
 
     </article> <!-- .product -->
   </script>
+
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="vendor/range-slider.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+  <script src="vendor/range-slider.min.js"></script>
   <script src="js/app.js" type="module"></script>
+
 </body>
 
 </html>
